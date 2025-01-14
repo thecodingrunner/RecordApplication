@@ -10,12 +10,12 @@ namespace RecordApplication.Controllers
     public class AlbumsController : ControllerBase
     {
         private readonly IAlbumsService _albumsService;
-        private readonly IArtistModel _artistModel;
+        private readonly IArtistService _artistService;
 
-        public AlbumsController(IAlbumsService albumsService, IArtistModel artistModel)
+        public AlbumsController(IAlbumsService albumsService, IArtistService artistService)
         {
             _albumsService = albumsService;
-            _artistModel = artistModel;
+            _artistService = artistService;
         }
 
         [HttpGet]
@@ -43,10 +43,10 @@ namespace RecordApplication.Controllers
         [HttpPost]
         public IActionResult PostAlbum(AlbumInput albumInput)
         {
-            Artist artist = _artistModel.FindArtistByName(albumInput.ArtistName);
+            Artist artist = _artistService.CheckIfArtistExists(albumInput.ArtistName);
             if (artist == null)
             {
-                artist = _artistModel.AddArtistToDb(albumInput.ArtistName);
+                artist = _artistService.AddArtistToDb(albumInput.ArtistName);
             }
 
             Album album = new Album(albumInput.AlbumName, artist.Id, artist, albumInput.ReleaseYear, albumInput.Units, albumInput.Genre, albumInput.Description);

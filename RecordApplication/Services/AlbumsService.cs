@@ -6,12 +6,10 @@ namespace RecordApplication.Services
     public class AlbumsService : IAlbumsService
     {
         private readonly IAlbumsModel _albumsModel;
-        private readonly IArtistModel _artistModel;
 
-        public AlbumsService(IAlbumsModel albumsModel, IArtistModel artistModel)
+        public AlbumsService(IAlbumsModel albumsModel)
         {
             _albumsModel = albumsModel;
-            _artistModel = artistModel;
         }
 
         public List<Album>? GetAllAlbums()
