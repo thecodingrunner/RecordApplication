@@ -37,5 +37,19 @@ namespace RecordApplication.Models
             }
             return album;
         }
+
+        public Album UpdateAlbum(Album album)
+        {
+            //try
+            //{
+            //    _albumDbContext.Albums.Update(album);
+            //    _albumDbContext.SaveChanges();
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception(ex.Message);
+            //}
+            return album;
+        }
     }
 }

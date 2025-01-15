@@ -26,5 +26,10 @@ namespace RecordApplication.Services
         {
             return _albumsModel.PostAlbum(album);
         }
+
+        public Album UpdateAlbum(Album album)
+        {
+            return _albumsModel.UpdateAlbum(album);
+        }
     }
 }

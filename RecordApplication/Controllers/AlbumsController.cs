@@ -42,20 +42,24 @@ namespace RecordApplication.Controllers
         [HttpPost]
         public IActionResult PostAlbum(AlbumInput albumInput)
         {
+            // Check for artist and add if doesn't exist
             var artist = _artistService.CheckIfArtistExists(albumInput.ArtistName);
             if (artist == null)
             {
                 artist = _artistService.AddArtistToDb(albumInput.ArtistName);
             }
 
+            // Parse genre string to enum
             Genre parsedGenre;
             if (!Enum.TryParse(albumInput.Genre, out parsedGenre))
             {
                 return BadRequest("Genre is not a valid value.");
             }
 
+            // Create new album using inputs
             Album album = new Album(albumInput.AlbumName, artist.Id, artist.Name, albumInput.ReleaseYear, albumInput.Units, parsedGenre, albumInput.Description);
 
+            // Post album and set posted album
             var postedAlbum = album;
             try
             {
@@ -66,10 +70,16 @@ namespace RecordApplication.Controllers
                 return BadRequest(ex.Message);
             }
 
+            // Return posted album
             return Ok(postedAlbum);
-
         }
 
+        [HttpPut("/{id}")]
+        public IActionResult PatchAlbum(int id, AlbumInput albumInput) 
+        {
+            Album album = _albumsService.UpdateAlbum();
+            return Ok(album);
+        }
 
     }
 }
