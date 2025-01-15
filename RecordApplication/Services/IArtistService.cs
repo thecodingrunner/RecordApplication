@@ -6,5 +6,6 @@ namespace RecordApplication.Services
     {
         Artist? AddArtistToDb(string artistName);
         Artist? CheckIfArtistExists(string artistName);
+        Album ConvertInputToAlbum(AlbumInput albumInput);
     }
 }
