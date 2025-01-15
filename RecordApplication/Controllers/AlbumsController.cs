@@ -11,7 +11,6 @@ namespace RecordApplication.Controllers
     {
         private readonly IAlbumsService _albumsService;
         private readonly IArtistService _artistService;
-
         public AlbumsController(IAlbumsService albumsService, IArtistService artistService)
         {
             _albumsService = albumsService;
@@ -43,20 +42,26 @@ namespace RecordApplication.Controllers
         [HttpPost]
         public IActionResult PostAlbum(AlbumInput albumInput)
         {
-            Artist artist = _artistService.CheckIfArtistExists(albumInput.ArtistName);
+            var artist = _artistService.CheckIfArtistExists(albumInput.ArtistName);
             if (artist == null)
             {
                 artist = _artistService.AddArtistToDb(albumInput.ArtistName);
             }
 
-            Album album = new Album(albumInput.AlbumName, artist.Id, artist, albumInput.ReleaseYear, albumInput.Units, albumInput.Genre, albumInput.Description);
+            Album album = new Album(albumInput.AlbumName, artist.Id, artist.Name, albumInput.ReleaseYear, albumInput.Units, albumInput.Genre, albumInput.Description);
 
-            var postedAlbum = _albumsService.PostAlbum(album);
-            if (postedAlbum == null)
+            var postedAlbum = album;
+            try
             {
-                return BadRequest("Could not post album");
+                postedAlbum = _albumsService.PostAlbum(album);
             }
+            catch (Exception ex) 
+            {
+                return BadRequest(ex.Message);
+            }
+
             return Ok(postedAlbum);
+
         }
 
 

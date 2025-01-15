@@ -19,14 +19,17 @@ namespace RecordApplication
 
             builder.Services.AddTransient<IAlbumsService, AlbumsService>();
             builder.Services.AddTransient<IAlbumsModel, AlbumsModel>();
+            builder.Services.AddTransient<IArtistService, ArtistService>();
+            builder.Services.AddTransient<IArtistModel, ArtistModel>();
 
             if (builder.Environment.IsDevelopment())
             {
-                builder.Services.AddDbContext<AlbumDbContext>(options => options.UseInMemoryDatabase("InMemoryDb"));
+                //builder.Services.AddDbContext<AlbumDbContext>(options => options.UseInMemoryDatabase("InMemoryDb"));
+                builder.Services.AddDbContext<AlbumDbContext>(options => options.UseSqlServer("DefaultConnectionString"));
             }
             else if (builder.Environment.IsProduction()) 
             {
-                builder.Services.AddDbContext<AlbumDbContext>(options => options.UseSqlServer("DefaultConnection"));
+                builder.Services.AddDbContext<AlbumDbContext>(options => options.UseSqlServer("DefaultConnectionString"));
             }
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

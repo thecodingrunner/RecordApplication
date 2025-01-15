@@ -24,10 +24,17 @@ namespace RecordApplication.Models
             return album;
         }
 
-        public Album? PostAlbum(Album album)
+        public Album PostAlbum(Album album)
         {
-            _albumDbContext.Albums.Add(album);
-            return album;
+            try
+            {
+                _albumDbContext.Albums.Add(album);
+                return album;
+            } 
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

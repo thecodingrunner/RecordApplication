@@ -14,8 +14,7 @@ namespace RecordApplication.Models
 
         public Artist? FindArtistByName(string name)
         {
-            var artist = _albumDbContext.Artists.FirstOrDefault(a => a.Name == name);
-            return artist;
+            return _albumDbContext.Artists.FirstOrDefault(a => a.Name == name);
         }
 
         public Artist? AddArtistToDb(string name)
