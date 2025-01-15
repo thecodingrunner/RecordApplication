@@ -129,5 +129,29 @@ namespace RecordApplicationTests
         }
 
         // DeleteAlbum Expected Functionality
+        [Test]
+        public void DeleteAlbum_Calls_Correct_Model_Method()
+        {
+            // Act
+            int id = 1;
+            _albumsService.DeleteAlbum(id);
+
+            // Assert
+            _albumsModelMock.Verify(s => s.DeleteAlbum(id), Times.Once());
+        }
+
+        [Test]
+        public void DeleteAlbum_Returns_Correct_Status_And_Boolean_When_Delete_Successful()
+        {
+            // Arrange 
+            int id = 1;
+            _albumsModelMock.Setup(service => service.DeleteAlbum(id)).Returns(true);
+
+            // Act
+            var result = _albumsService.DeleteAlbum(id);
+
+            // Assert
+            result.Should().Be(true);
+        }
     }
 }
