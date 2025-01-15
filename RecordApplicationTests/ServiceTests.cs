@@ -98,5 +98,34 @@ namespace RecordApplicationTests
             // Assert
             result.Should().BeEquivalentTo(album);
         }
+
+        // PutAlbum Expected Functionality
+        [Test]
+        public void PutAlbum_Calls_Correct_Model_Method()
+        {
+            // Arrange
+            Album album = new Album("Cheat Codes", 1, "Danger Mouse", 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
+
+            // Act
+            var postedAlbum = _albumsService.UpdateAlbum(album);
+
+            // Assert
+            _albumsModelMock.Verify(s => s.UpdateAlbum(It.IsAny<Album>()), Times.Once());
+        }
+
+        [Test]
+        public void PutAlbum_Returns_Correct_Status_And_Value_When_Artist_Exists()
+        {
+            // Arrange 
+            Album album = new Album("Cheat Codes", 1, "Danger Mouse", 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
+
+            _albumsModelMock.Setup(service => service.UpdateAlbum(It.IsAny<Album>())).Returns(album);
+
+            // Act
+            var result = _albumsService.UpdateAlbum(album);
+
+            // Assert
+            result.Should().BeEquivalentTo(album);
+        }
     }
 }
