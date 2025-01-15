@@ -9,5 +9,6 @@ namespace RecordApplication.Services
         Album GetAlbumById(int id);
         Album PostAlbum(Album album);
         Album UpdateAlbum(Album album);
+        bool DeleteAlbum(int id);
     }
 }

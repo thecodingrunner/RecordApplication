@@ -9,5 +9,6 @@ namespace RecordApplication.Models
         Album FindAlbumById(int id);
         Album PostAlbum(Album album);
         Album UpdateAlbum(Album album);
+        bool DeleteAlbum(int id);
     }
 }
