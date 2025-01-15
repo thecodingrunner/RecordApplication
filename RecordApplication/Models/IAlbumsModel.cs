@@ -8,5 +8,6 @@ namespace RecordApplication.Models
         List<Album> FindAlbums();
         Album FindAlbumById(int id);
         Album PostAlbum(Album album);
+        Album UpdateAlbum(Album album);
     }
 }
