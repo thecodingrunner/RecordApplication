@@ -40,15 +40,15 @@ namespace RecordApplication.Models
 
         public Album UpdateAlbum(Album album)
         {
-            //try
-            //{
-            //    _albumDbContext.Albums.Update(album);
-            //    _albumDbContext.SaveChanges();
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw new Exception(ex.Message);
-            //}
+            try
+            {
+                _albumDbContext.Albums.Update(album);
+                _albumDbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
             return album;
         }
     }
