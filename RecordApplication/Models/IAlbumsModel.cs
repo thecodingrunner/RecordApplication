@@ -10,5 +10,6 @@ namespace RecordApplication.Models
         Album PostAlbum(Album album);
         Album UpdateAlbum(Album album);
         bool DeleteAlbum(int id);
+        List<Album> GetAlbumsByArtist(string artistName);
     }
 }

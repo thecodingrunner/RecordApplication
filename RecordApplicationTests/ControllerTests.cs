@@ -92,6 +92,7 @@ namespace RecordApplicationTests
             // Arrange
             AlbumInput albumInput = new AlbumInput("Cheat Codes", "Danger Mouse", 2022, 2, "HipHop", "Danger Mouse and Black Thought");
             Artist artist = new Artist("Danger Mouse");
+
             _artistServiceMock.Setup(service => service.CheckIfArtistExists(albumInput.ArtistName)).Returns(artist);
 
             // Act

@@ -36,5 +36,10 @@ namespace RecordApplication.Services
         {
             return _albumsModel.DeleteAlbum(id);
         }
+
+        public List<Album> GetAlbumsByArtist(string artistName)
+        {
+            return _albumsModel.GetAlbumsByArtist();
+        }
     }
 }

@@ -81,5 +81,12 @@ namespace RecordApplication.Controllers
                 return NotFound();
             }
         }
+
+        [HttpGet("/{artist}")]
+        public IActionResult GetAlbumsByArtist(string artistName)
+        {
+            var albumsList = _albumsService.GetAlbumsByArtist(artistName);
+            return Ok(albumsList);
+        }
     }
 }

@@ -64,5 +64,10 @@ namespace RecordApplication.Models
                 return false;
             }
         }
+
+        public List<Album> GetAlbumsByArtist(string artistName)
+        {
+            return new List<Album>() { };
+        }
     }
 }
