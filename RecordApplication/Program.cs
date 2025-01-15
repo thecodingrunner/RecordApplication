@@ -11,7 +11,7 @@ namespace RecordApplication
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            //string connectionString = builder.Configuration.GetConnectionString("DevelopmentConnectionString");
+            string connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
 
             // Add services to the container.
 
@@ -25,7 +25,7 @@ namespace RecordApplication
             if (builder.Environment.IsDevelopment())
             {
                 //builder.Services.AddDbContext<AlbumDbContext>(options => options.UseInMemoryDatabase("InMemoryDb"));
-                builder.Services.AddDbContext<AlbumDbContext>(options => options.UseSqlServer("DefaultConnectionString"));
+                builder.Services.AddDbContext<AlbumDbContext>(options => options.UseSqlServer(connectionString));
             }
             else if (builder.Environment.IsProduction()) 
             {

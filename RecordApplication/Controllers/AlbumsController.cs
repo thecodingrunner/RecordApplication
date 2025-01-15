@@ -48,7 +48,13 @@ namespace RecordApplication.Controllers
                 artist = _artistService.AddArtistToDb(albumInput.ArtistName);
             }
 
-            Album album = new Album(albumInput.AlbumName, artist.Id, artist.Name, albumInput.ReleaseYear, albumInput.Units, albumInput.Genre, albumInput.Description);
+            Genre parsedGenre;
+            if (!Enum.TryParse(albumInput.Genre, out parsedGenre))
+            {
+                return BadRequest("Genre is not a valid value.");
+            }
+
+            Album album = new Album(albumInput.AlbumName, artist.Id, artist.Name, albumInput.ReleaseYear, albumInput.Units, parsedGenre, albumInput.Description);
 
             var postedAlbum = album;
             try

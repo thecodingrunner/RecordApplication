@@ -2,7 +2,7 @@
 {
     public class AlbumInput
     {
-        public AlbumInput(string albumName, string artistName, int releaseYear, int units, Genre genre, string description)
+        public AlbumInput(string albumName, string artistName, int releaseYear, int units, string genre, string description)
         {
             AlbumName = albumName;
             ArtistName = artistName;
@@ -17,7 +17,7 @@
         public string ArtistName { get; set; }
         public int ReleaseYear { get; set; }
         public int Units { get; set; }
-        public Genre Genre { get; set; }
+        public string Genre { get; set; }
         public string Description { get; set; }
     }
 }

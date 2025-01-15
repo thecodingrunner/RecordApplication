@@ -29,12 +29,13 @@ namespace RecordApplication.Models
             try
             {
                 _albumDbContext.Albums.Add(album);
-                return album;
+                _albumDbContext.SaveChanges();
             } 
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+            return album;
         }
     }
 }
