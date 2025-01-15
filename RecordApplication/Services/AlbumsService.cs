@@ -31,5 +31,10 @@ namespace RecordApplication.Services
         {
             return _albumsModel.UpdateAlbum(album);
         }
+
+        public bool DeleteAlbum(int id)
+        {
+            return _albumsModel.DeleteAlbum(id);
+        }
     }
 }

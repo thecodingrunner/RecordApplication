@@ -127,5 +127,7 @@ namespace RecordApplicationTests
             // Assert
             result.Should().BeEquivalentTo(album);
         }
+
+        // DeleteAlbum Expected Functionality
     }
 }

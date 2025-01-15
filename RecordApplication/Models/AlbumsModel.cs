@@ -51,5 +51,18 @@ namespace RecordApplication.Models
             }
             return album;
         }
+
+        public bool DeleteAlbum(int id)
+        {
+            try
+            {
+                var albumToDelete = _albumDbContext.Albums.FirstOrDefault(album => album.Id == id);
+                _albumDbContext.Albums.Remove(albumToDelete);
+                return true;
+            } catch
+            {
+                return false;
+            }
+        }
     }
 }

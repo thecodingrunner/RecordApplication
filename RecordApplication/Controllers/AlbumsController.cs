@@ -68,5 +68,18 @@ namespace RecordApplication.Controllers
             return Ok(updatedAlbum);
         }
 
+        [HttpDelete("/{id}")]
+        public IActionResult DeleteAlbum(int id)
+        {
+            bool resultSuccessfully = _albumsService.DeleteAlbum(id);
+            if (resultSuccessfully)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }
