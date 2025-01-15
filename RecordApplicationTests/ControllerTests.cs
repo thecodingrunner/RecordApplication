@@ -90,7 +90,7 @@ namespace RecordApplicationTests
         public void PostAlbum_Calls_Correct_Service_Method_When_Artist_Exists()
         {
             // Arrange
-            AlbumInput albumInput = new AlbumInput("Cheat Codes", "Danger Mouse", 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
+            AlbumInput albumInput = new AlbumInput("Cheat Codes", "Danger Mouse", 2022, 2, "HipHop", "Danger Mouse and Black Thought");
             Artist artist = new Artist("Danger Mouse");
             _artistServiceMock.Setup(service => service.CheckIfArtistExists(albumInput.ArtistName)).Returns(artist);
 
@@ -105,7 +105,7 @@ namespace RecordApplicationTests
         public void PostAlbum_Returns_Correct_Status_And_Value_When_Artist_Exists()
         {
             // Arrange 
-            AlbumInput albumInput = new AlbumInput("Cheat Codes", "Danger Mouse", 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
+            AlbumInput albumInput = new AlbumInput("Cheat Codes", "Danger Mouse", 2022, 2, "HipHop", "Danger Mouse and Black Thought");
             Artist artist = new Artist("Danger Mouse");
             Album album = new Album("Cheat Codes", artist.Id, artist.Name, 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
             _artistServiceMock.Setup(service => service.CheckIfArtistExists(albumInput.ArtistName)).Returns(artist);

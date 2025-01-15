@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using RecordApplication.Controllers;
 using RecordApplication.Entities;
 using RecordApplication.Models;
 using RecordApplication.Services;
@@ -64,6 +65,35 @@ namespace RecordApplicationTests
 
             // Act
             var result = _albumsService.GetAlbumById(1);
+
+            // Assert
+            result.Should().BeEquivalentTo(album);
+        }
+
+        // PostAlbum Expected Functionality
+        [Test]
+        public void PostAlbum_Calls_Correct_Model_Method()
+        {
+            // Arrange
+            Album album = new Album("Cheat Codes", 1, "Danger Mouse", 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
+
+            // Act
+            var postedAlbum = _albumsService.PostAlbum(album);
+
+            // Assert
+            _albumsModelMock.Verify(s => s.PostAlbum(It.IsAny<Album>()), Times.Once());
+        }
+
+        [Test]
+        public void PostAlbum_Returns_Correct_Status_And_Value_When_Artist_Exists()
+        {
+            // Arrange 
+            Album album = new Album("Cheat Codes", 1, "Danger Mouse", 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
+
+            _albumsModelMock.Setup(service => service.PostAlbum(It.IsAny<Album>())).Returns(album);
+
+            // Act
+            var result = _albumsService.PostAlbum(album);
 
             // Assert
             result.Should().BeEquivalentTo(album);
