@@ -82,11 +82,13 @@ namespace RecordApplication.Controllers
             }
         }
 
-        [HttpGet("/{artist}")]
+        [HttpGet("/albumsbyartist/{artistName}")]
         public IActionResult GetAlbumsByArtist(string artistName)
         {
             var albumsList = _albumsService.GetAlbumsByArtist(artistName);
             return Ok(albumsList);
         }
+
+
     }
 }

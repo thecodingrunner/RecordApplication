@@ -67,7 +67,7 @@ namespace RecordApplication.Models
 
         public List<Album> GetAlbumsByArtist(string artistName)
         {
-            return new List<Album>() { };
+            return _albumDbContext.Albums.Where(album => album.ArtistName == artistName).ToList();
         }
     }
 }
