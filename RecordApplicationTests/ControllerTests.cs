@@ -205,5 +205,36 @@ namespace RecordApplicationTests
             result.Should()
                 .BeOfType<NotFoundResult>();
         }
+
+        // GetAlbumsByArtist Expected Functionality
+        [Test]
+        public void GetAlbumsByArtist_Calls_Correct_Service_Method()
+        {
+            string artistName = "Danger Mouse";
+            _albumsController.GetAlbumsByArtist(artistName);
+
+            _albumsServiceMock.Verify(s => s.GetAlbumsByArtist(artistName), Times.Once());
+        }
+
+        [Test]
+        public void GetAlbumsByArtist_Returns_Correct_Status_And_Value()
+        {
+            // Arrange 
+            string artistName = "Danger Mouse";
+            List<Album> albums = new List<Album>()
+            {
+                new Album("Cheat Codes", 1, "Danger Mouse", 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought"),
+            };
+
+            _albumsServiceMock.Setup(service => service.GetAlbumsByArtist(artistName)).Returns(albums);
+
+            // Act
+            var result = _albumsController.GetAlbumsByArtist(artistName);
+
+            // Assert
+            result.Should()
+                .BeOfType<OkObjectResult>()
+                .Which.Value.Should().Be(albums);
+        }
     }
 }

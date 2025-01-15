@@ -39,7 +39,7 @@ namespace RecordApplication.Services
 
         public List<Album> GetAlbumsByArtist(string artistName)
         {
-            return _albumsModel.GetAlbumsByArtist();
+            return _albumsModel.GetAlbumsByArtist(artistName);
         }
     }
 }
