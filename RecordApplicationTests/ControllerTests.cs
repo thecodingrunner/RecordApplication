@@ -176,7 +176,7 @@ namespace RecordApplicationTests
         }
 
         [Test]
-        public void DeleteAlbum_Returns_Correct_Status_And_Boolean_When_Delete_Successful()
+        public void DeleteAlbum_Returns_NoContent_Status_And_Boolean_When_Delete_Successful()
         {
             // Arrange 
             int id = 1;
@@ -188,6 +188,21 @@ namespace RecordApplicationTests
             // Assert
             result.Should()
                 .BeOfType<NoContentResult>();
+        }
+
+        [Test]
+        public void DeleteAlbum_Returns_NotFound_Status_And_Boolean_When_Delete_Successful()
+        {
+            // Arrange 
+            int id = 1;
+            _albumsServiceMock.Setup(service => service.DeleteAlbum(id)).Returns(false);
+
+            // Act
+            var result = _albumsController.DeleteAlbum(id);
+
+            // Assert
+            result.Should()
+                .BeOfType<NotFoundResult>();
         }
     }
 }
