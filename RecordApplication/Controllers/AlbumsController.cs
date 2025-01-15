@@ -60,7 +60,7 @@ namespace RecordApplication.Controllers
         }
 
         [HttpPut("/{id}")]
-        public IActionResult PatchAlbum(int id, AlbumInput albumInput) 
+        public IActionResult PutAlbum(int id, AlbumInput albumInput) 
         {
             var album = ConvertInputToAlbum(albumInput);
             album.Id = id;

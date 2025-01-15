@@ -120,5 +120,43 @@ namespace RecordApplicationTests
                 .BeOfType<OkObjectResult>()
                 .Which.Value.Should().Be(album);
         }
+
+        // PutAlbum Expected Functionality
+        [Test]
+        public void PutAlbum_Calls_Correct_Service_Method()
+        {
+            // Arrange
+            AlbumInput albumInput = new AlbumInput("Cheat Codes", "Danger Mouse", 2022, 2, "HipHop", "Danger Mouse and Black Thought");
+            Artist artist = new Artist("Danger Mouse");
+            int id = 1;
+            _artistServiceMock.Setup(service => service.CheckIfArtistExists(albumInput.ArtistName)).Returns(artist);
+
+            // Act
+            _albumsController.PutAlbum(id, albumInput);
+
+            // Assert
+            _albumsServiceMock.Verify(s => s.UpdateAlbum(It.IsAny<Album>()), Times.Once());
+        }
+
+        [Test]
+        public void PutAlbum_Returns_Correct_Status_And_Value_When_Artist_Exists()
+        {
+            // Arrange 
+            AlbumInput albumInput = new AlbumInput("Cheat Codes", "Danger Mouse", 2022, 2, "HipHop", "Danger Mouse and Black Thought");
+            Artist artist = new Artist("Danger Mouse");
+            int id = 1;
+            Album album = new Album("Cheat Codes", artist.Id, artist.Name, 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
+            _artistServiceMock.Setup(service => service.CheckIfArtistExists(albumInput.ArtistName)).Returns(artist);
+
+            _albumsServiceMock.Setup(service => service.UpdateAlbum(It.IsAny<Album>())).Returns(album);
+
+            // Act
+            var result = _albumsController.PutAlbum(id, albumInput);
+
+            // Assert
+            result.Should()
+                .BeOfType<OkObjectResult>()
+                .Which.Value.Should().Be(album);
+        }
     }
 }
