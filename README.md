@@ -1,5 +1,4 @@
-flowchart LR
-   a --> b & c--> d
+
 
 
 ```mermaid
@@ -8,6 +7,9 @@ flowchart LR
       A-->C;
       B-->D;
       C-->D;
+
+flowchart LR
+   a --> b & c--> d
 ```
 
 
