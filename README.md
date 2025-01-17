@@ -30,7 +30,7 @@ classDiagram
     -Id : int
     -Name : string
   }
-  Album "1" --o "1" Artist
+  Album "many" --o "1" Artist
 ```
 
 
