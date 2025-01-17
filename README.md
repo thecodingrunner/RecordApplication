@@ -3,12 +3,13 @@
 
 ```mermaid
 flowchart LR
-   a --> b;
-   b --> c;
-   c --> d;
-   a --> e;
-   e --> f;
-   f --> d;
+   User --> AlbumController;
+   AlbumController --> AlbumService;
+   AlbumService --> AlbumModel;
+   AlbumModel --> RecordShopDb;
+   User --> f;
+   f --> g;
+   g --> e;
 ```
 
 
