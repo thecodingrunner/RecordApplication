@@ -13,6 +13,26 @@ flowchart LR
    ArtistModel -- CRUD Operations --> RecordShopDb;
 ```
 
+```mermaid
+classDiagram
+  direction RL
+  class Album {
+    +Id : int
+    +AlbumName : string
+    +ArtistId : int
+    +ArtistName : string
+    +ReleaseYear : int
+    +Units : int
+    +Genre : Genre
+    +Description : string
+  }
+  class Artist {
+    -Id : int
+    -Name : string
+  }
+  Album "1" --o "1" Artist
+```
+
 
 
 | Method Name | Method Endpoint | HTTP Method | Example Input |
