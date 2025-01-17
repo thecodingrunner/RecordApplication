@@ -91,15 +91,12 @@ namespace RecordApplicationTests
         {
             // Arrange
             AlbumInput albumInput = new AlbumInput("Cheat Codes", "Danger Mouse", 2022, 2, "HipHop", "Danger Mouse and Black Thought");
-            Artist artist = new Artist("Danger Mouse");
-
-            _artistServiceMock.Setup(service => service.CheckIfArtistExists(albumInput.ArtistName)).Returns(artist);
 
             // Act
             _albumsController.PostAlbum(albumInput);
 
             // Assert
-            _albumsServiceMock.Verify(s => s.PostAlbum(It.IsAny<Album>()), Times.Once());
+            _albumsServiceMock.Verify(s => s.PostAlbum(It.IsAny<AlbumInput>()), Times.Once());
         }
 
         [Test]
@@ -110,8 +107,7 @@ namespace RecordApplicationTests
             Artist artist = new Artist("Danger Mouse");
             Album album = new Album("Cheat Codes", artist.Id, artist.Name, 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
 
-            _artistServiceMock.Setup(service => service.CheckIfArtistExists(albumInput.ArtistName)).Returns(artist);
-            _albumsServiceMock.Setup(service => service.PostAlbum(It.IsAny<Album>())).Returns(album);
+            _albumsServiceMock.Setup(service => service.PostAlbum(It.IsAny<AlbumInput>())).Returns(album);
 
             // Act
             var result = _albumsController.PostAlbum(albumInput);
@@ -132,14 +128,11 @@ namespace RecordApplicationTests
             Album album = new Album("Cheat Codes", artist.Id, artist.Name, 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
             int id = 1;
 
-            _artistServiceMock.Setup(service => service.CheckIfArtistExists(albumInput.ArtistName)).Returns(artist);
-            _artistServiceMock.Setup(service => service.ConvertInputToAlbum(albumInput)).Returns(album);
-
             // Act
             _albumsController.PutAlbum(id, albumInput);
 
             // Assert
-            _albumsServiceMock.Verify(s => s.UpdateAlbum(It.IsAny<Album>()), Times.Once());
+            _albumsServiceMock.Verify(s => s.UpdateAlbum(id, It.IsAny<AlbumInput>()), Times.Once());
         }
 
         [Test]
@@ -151,9 +144,7 @@ namespace RecordApplicationTests
             Album album = new Album("Cheat Codes", artist.Id, artist.Name, 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
             int id = 1;
 
-            _artistServiceMock.Setup(service => service.CheckIfArtistExists(albumInput.ArtistName)).Returns(artist);
-            _artistServiceMock.Setup(service => service.ConvertInputToAlbum(albumInput)).Returns(album);
-            _albumsServiceMock.Setup(service => service.UpdateAlbum(It.IsAny<Album>())).Returns(album);
+            _albumsServiceMock.Setup(service => service.UpdateAlbum(id, It.IsAny<AlbumInput>())).Returns(album);
 
             // Act
             var result = _albumsController.PutAlbum(id, albumInput);

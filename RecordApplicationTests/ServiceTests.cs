@@ -11,13 +11,15 @@ namespace RecordApplicationTests
     public class ServiceTests
     {
         private Mock<IAlbumsModel> _albumsModelMock;
+        private Mock<IArtistModel> _artistModelMock;
         private AlbumsService _albumsService;
 
         [SetUp]
         public void Setup()
         {
             _albumsModelMock = new Mock<IAlbumsModel>();
-            _albumsService = new AlbumsService( _albumsModelMock.Object );
+            _artistModelMock = new Mock<IArtistModel>();
+            _albumsService = new AlbumsService( _albumsModelMock.Object, _artistModelMock.Object );
         }
 
         // GetAllAlbums Expected Functionality
@@ -76,9 +78,13 @@ namespace RecordApplicationTests
         {
             // Arrange
             Album album = new Album("Cheat Codes", 1, "Danger Mouse", 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
+            Artist artist = new Artist("Danger Mouse");
+            AlbumInput albumInput = new AlbumInput("Cheat Codes", "Danger Mouse", 2022, 2, "HipHop", "Danger Mouse and Black Thought");
+
+            _artistModelMock.Setup(model => model.FindArtistByName(albumInput.ArtistName)).Returns(artist);
 
             // Act
-            var postedAlbum = _albumsService.PostAlbum(album);
+            var postedAlbum = _albumsService.PostAlbum(albumInput);
 
             // Assert
             _albumsModelMock.Verify(s => s.PostAlbum(It.IsAny<Album>()), Times.Once());
@@ -89,11 +95,14 @@ namespace RecordApplicationTests
         {
             // Arrange 
             Album album = new Album("Cheat Codes", 1, "Danger Mouse", 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
+            Artist artist = new Artist("Danger Mouse");
+            AlbumInput albumInput = new AlbumInput("Cheat Codes", "Danger Mouse", 2022, 2, "HipHop", "Danger Mouse and Black Thought");
 
+            _artistModelMock.Setup(model => model.FindArtistByName(albumInput.ArtistName)).Returns(artist);
             _albumsModelMock.Setup(service => service.PostAlbum(It.IsAny<Album>())).Returns(album);
 
             // Act
-            var result = _albumsService.PostAlbum(album);
+            var result = _albumsService.PostAlbum(albumInput);
 
             // Assert
             result.Should().BeEquivalentTo(album);
@@ -105,9 +114,14 @@ namespace RecordApplicationTests
         {
             // Arrange
             Album album = new Album("Cheat Codes", 1, "Danger Mouse", 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
+            Artist artist = new Artist("Danger Mouse");
+            AlbumInput albumInput = new AlbumInput("Cheat Codes", "Danger Mouse", 2022, 2, "HipHop", "Danger Mouse and Black Thought");
+            int id = 1;
+
+            _artistModelMock.Setup(model => model.FindArtistByName(albumInput.ArtistName)).Returns(artist);
 
             // Act
-            var postedAlbum = _albumsService.UpdateAlbum(album);
+            var postedAlbum = _albumsService.UpdateAlbum(id, albumInput);
 
             // Assert
             _albumsModelMock.Verify(s => s.UpdateAlbum(It.IsAny<Album>()), Times.Once());
@@ -118,11 +132,15 @@ namespace RecordApplicationTests
         {
             // Arrange 
             Album album = new Album("Cheat Codes", 1, "Danger Mouse", 2022, 2, Genre.HipHop, "Danger Mouse and Black Thought");
+            Artist artist = new Artist("Danger Mouse");
+            AlbumInput albumInput = new AlbumInput("Cheat Codes", "Danger Mouse", 2022, 2, "HipHop", "Danger Mouse and Black Thought");
+            int id = 1;
 
+            _artistModelMock.Setup(model => model.FindArtistByName(albumInput.ArtistName)).Returns(artist);
             _albumsModelMock.Setup(service => service.UpdateAlbum(It.IsAny<Album>())).Returns(album);
 
             // Act
-            var result = _albumsService.UpdateAlbum(album);
+            var result = _albumsService.UpdateAlbum(id, albumInput);
 
             // Assert
             result.Should().BeEquivalentTo(album);

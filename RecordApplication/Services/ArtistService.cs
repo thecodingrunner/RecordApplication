@@ -21,27 +21,5 @@ namespace RecordApplication.Services
         {
             return _artistModel.AddArtistToDb(artistName);
         }
-
-        public Album ConvertInputToAlbum(AlbumInput albumInput)
-        {
-            // Check for artist and add if doesn't exist
-            var artist = CheckIfArtistExists(albumInput.ArtistName);
-            if (artist == null)
-            {
-                artist = AddArtistToDb(albumInput.ArtistName);
-            }
-
-            // Parse genre string to enum
-            Genre parsedGenre;
-            if (!Enum.TryParse(albumInput.Genre, out parsedGenre))
-            {
-                throw new ArgumentException("Genre is not a valid value.");
-            }
-
-            // Create new album using inputs
-            Album album = new Album(albumInput.AlbumName, artist.Id, artist.Name, albumInput.ReleaseYear, albumInput.Units, parsedGenre, albumInput.Description);
-
-            return album;
-        }
     }
 }

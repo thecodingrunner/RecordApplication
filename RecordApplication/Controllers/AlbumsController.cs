@@ -42,19 +42,11 @@ namespace RecordApplication.Controllers
         [HttpPost]
         public IActionResult PostAlbum(AlbumInput albumInput)
         {
-            var album = _artistService.ConvertInputToAlbum(albumInput);
-
-            // Post album and set posted album
-            var postedAlbum = album;
-            try
+            Album postedAlbum = _albumsService.PostAlbum(albumInput);
+            if (postedAlbum == null) 
             {
-                postedAlbum = _albumsService.PostAlbum(album);
+                return BadRequest();
             }
-            catch (Exception ex) 
-            {
-                return BadRequest(ex.Message);
-            }
-
             // Return posted album
             return Ok(postedAlbum);
         }
@@ -62,9 +54,7 @@ namespace RecordApplication.Controllers
         [HttpPut("/{id}")]
         public IActionResult PutAlbum(int id, AlbumInput albumInput) 
         {
-            var album = _artistService.ConvertInputToAlbum(albumInput);
-            album.Id = id;
-            Album updatedAlbum = _albumsService.UpdateAlbum(album);
+            Album updatedAlbum = _albumsService.UpdateAlbum(id, albumInput);
             return Ok(updatedAlbum);
         }
 
