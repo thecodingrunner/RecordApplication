@@ -7,9 +7,10 @@ flowchart LR
    AlbumController --> AlbumService;
    AlbumService --> AlbumModel;
    AlbumModel --> RecordShopDb;
-   User --> f;
-   f --> g;
-   g --> e;
+   User --> ArtistController;
+   ArtistController --> ArtistService;
+   ArtistService --> ArtistModel;
+   ArtistModel --> RecordShopDb;
 ```
 
 
