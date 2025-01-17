@@ -1,5 +1,8 @@
+#Record Shop
 
+An ASP.NET RESTful API using the MVC pattern. This API allows you to make HTTP requests to perform CRUD operations on an SQL Database of Artists and Albums.
 
+##Project Flowchart
 
 ```mermaid
 flowchart LR
@@ -12,6 +15,8 @@ flowchart LR
    ArtistService --> ArtistModel;
    ArtistModel -- CRUD Operations --> RecordShopDb;
 ```
+
+##Class Diagram
 
 ```mermaid
 classDiagram
@@ -30,10 +35,10 @@ classDiagram
     -Id : int
     -Name : string
   }
-  Album "many" --o "1" Artist
+  Album "1..*" --o "1" Artist
 ```
 
-
+##API Endpoints Available:
 
 | Method Name | Method Endpoint | HTTP Method | Example Input |
 | --- | --- | --- | --- |
@@ -44,3 +49,18 @@ classDiagram
 | DeleteAlbum() | "api/album/{id}" | Delete | Param: "api/album/2" |
 | GetAlbumsByArtist() | "api/album/albumsbyartist/{artistName}" | Get | Param: "api/album/Danger Mouse" |
 
+##Set-up:
+
+- You will need an IDE for running C# .NET applications and SQL server installed
+- Fork the repo and clone it onto your local machine
+- Run Program.cs
+- Test endpoints using Swagger or Postman
+
+##Further Development:
+- Add additional testing
+- Add additional functionality and more requests
+- Add middleware, auth, rate limiting etc.
+- Add fully functional frontend
+- Add health checks
+- Add a patch request as alternative to put
+- Add Caching to reduce unneccessary database calls
