@@ -1,6 +1,13 @@
-# Record Shop
+# ASP.NET Record Shop Application
 
 An ASP.NET RESTful API using the MVC pattern. This API allows you to make HTTP requests to perform CRUD operations on an SQL Database of Artists and Albums.
+This project was developed as a solo project during Northcoders software development bootcamp in C#.
+
+## Technologies
+- Language: C#
+- Framework: ASP.NET Core 8.0
+- Tools: Entity Framework Core, NUnit, Moq, Fluent Assertions
+- Database: SQL Server
 
 ## Project Flowchart
 
@@ -40,12 +47,13 @@ classDiagram
 
 ## API Endpoints Available:
 
+### Resource: Albums
 | Method Name | Method Endpoint | HTTP Method | Example Input |
 | --- | --- | --- | --- |
 | GetAlbums() | "api/album" | Get | - |
 | GetAlbumById() | "api/album/{id}" | Get | Param: "api/album/3" |
-| PostAlbum() | "api/album" | Post | Post body: { "albumName": "Cheat Codes", "artistName": "Danger Mouse", "releaseYear": 2022, "units": 6, "genre": "HipHop", "description": "Collaboration album with Black thought" } |
-| PutAlbum() | "api/album/{id}" | Put | Post body: { "albumName": "Cheat Codes", "artistName": "Danger Mouse", "releaseYear": 2022, "units": 6, "genre": "HipHop", "description": "Collaboration album with Black thought" } <br> Param: "api/album/1" |
+| PostAlbum() | "api/album" | Post | Post body: ```{ "albumName": "Cheat Codes", "artistName": "Danger Mouse", "releaseYear": 2022, "units": 6, "genre": "HipHop", "description": "Collaboration album with Black thought" }``` |
+| PutAlbum() | "api/album/{id}" | Put | Post body: ```{ "albumName": "Cheat Codes", "artistName": "Danger Mouse", "releaseYear": 2022, "units": 6, "genre": "HipHop", "description": "Collaboration album with Black thought" }``` <br> Param: "api/album/1" |
 | DeleteAlbum() | "api/album/{id}" | Delete | Param: "api/album/2" |
 | GetAlbumsByArtist() | "api/album/albumsbyartist/{artistName}" | Get | Param: "api/album/Danger Mouse" |
 
