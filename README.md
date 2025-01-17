@@ -3,11 +3,11 @@
 
 ```mermaid
 flowchart LR
-   User --> AlbumController;
+   User --> HTTP Request/Response --> AlbumController;
    AlbumController --> AlbumService;
    AlbumService --> AlbumModel;
    AlbumModel --> RecordShopDb;
-   User --> ArtistController;
+   User --> HTTP Request/Response --> ArtistController;
    ArtistController --> ArtistService;
    ArtistService --> ArtistModel;
    ArtistModel --> RecordShopDb;
