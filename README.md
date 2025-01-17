@@ -6,11 +6,11 @@ flowchart LR
    User -- HTTP Request/Response --> AlbumController;
    AlbumController --> AlbumService;
    AlbumService --> AlbumModel;
-   AlbumModel --> RecordShopDb;
+   AlbumModel -- CRUD Operations --> RecordShopDb;
    User -- HTTP Request/Response --> ArtistController;
    ArtistController --> ArtistService;
    ArtistService --> ArtistModel;
-   ArtistModel --> RecordShopDb;
+   ArtistModel -- CRUD Operations --> RecordShopDb;
 ```
 
 
