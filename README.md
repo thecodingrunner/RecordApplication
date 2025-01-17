@@ -3,7 +3,7 @@
 
 ```mermaid
 flowchart LR
-   a --> b & c--> d
+   a --> b & b --> c & c --> d & a --> e & e --> f & f --> d
 ```
 
 
